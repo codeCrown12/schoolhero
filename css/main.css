@@ -26,3 +26,9 @@
     width: 200px;
     object-fit: cover;
 }
+.card-body{
+    text-align: end;
+}
+@media screen and (max-width: 700){
+    
+}

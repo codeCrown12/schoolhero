@@ -11,38 +11,45 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 </head>
 <body class="bg-white">
-    <!-- Navigation bar -->
-    <nav class="navbar navbar-light bg-white border-bottom navbar-expand">
-        <div class="container-fluid">
-          <a class="navbar-brand fw-bold" href="#">🦸SchoolHero</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-              <li class="nav-item">
-                <div class="d-flex">
-                    <a class="nav-link active" aria-current="page" href="#"><i class="social-icons fab fa-linkedin"></i></a>
-                    <a class="nav-link active" aria-current="page" href="#"><i class="social-icons fab fa-twitter"></i></a>
-                    <a class="nav-link active" aria-current="page" href="#"><i class="social-icons fab fa-github"></i></a>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-    </nav>
-    <div id="app" class="mt-5">
+    <div id="app">
+        <!-- Navigation bar -->
+        <nav class="navbar navbar-light bg-white border-bottom navbar-expand">
+            <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="#">🦸SchoolHero</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-primary btn-sm position-relative">
+                            Cart
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            {{ cart_items }}
+                            </span>
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <div class="d-flex">
+                            <a class="nav-link active" aria-current="page" href="#"><i class="social-icons fab fa-linkedin"></i></a>
+                            <a class="nav-link active" aria-current="page" href="#"><i class="social-icons fab fa-twitter"></i></a>
+                            <a class="nav-link active" aria-current="page" href="#"><i class="social-icons fab fa-github"></i></a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            </div>
+        </nav>
         <!-- Page-caption -->
-        <div class="container-fluid border-bottom">
+        <div class="container-fluid border-bottom mt-5">
             <div class="row justify-content-center">
                 <div class="col-md-7">
                     <h1 class="text-center page-caption">
                         2,500+ after-school activities to power up your learning.
                     </h1>
                     <p class="text-center">Discover new after-school activities and classes that will help shape your mind, body and your future 🚀!</p>
-                    <div class="input-group mb-5">
+                    <div class="mb-5">
                         <input type="text" class="form-control rounded-0 p-2" placeholder="Search names, locations for interesting activities..." aria-label="Recipient's username" aria-describedby="button-addon2">
-                        <button class="btn btn-outline-primary rounded-0" type="button" id="button-addon2"><i class="fas fa-search"></i> search</button>
                     </div>
                 </div>
             </div>
@@ -57,12 +64,12 @@
                             <img v-bind:src="activity.img_url" class="img-fluid rounded-0 mycard-img" alt="...">
                           </div>
                           <div class="col-md-6">
-                            <div class="card-body text-end">
+                            <div class="card-body">
                               <h5 class="card-title">{{activity.title}}</h5>
                               <p class="card-text m-0"><strong>Location:</strong> {{activity.location}}</p>
                               <p class="card-text m-0"><strong>Price:</strong> $ {{activity.price}}</p>
                               <p class="card-text mb-2"><strong>Spaces</strong>: {{activity.spaces}}</p>
-                              <button class="btn btn-sm btn-primary rounded-0" v-on:click="addToCart">Add to cart</button>
+                              <button class="btn btn-sm btn-primary rounded-0" v-on:click="addToCart(activity.id, activity.spaces)">Add to cart</button>
                             </div>
                           </div>
                         </div>
@@ -71,10 +78,10 @@
             </div>
         </div>
         <footer>
-            <div class="container">
+            <div class="container mt-5">
                 <div class="rown justify-content-center">
                     <p class="text-center m-0">Made with ❤️ and Vue js</p>
-                    <p class="text-center m-0">codecrown | &copy; 2022</p>
+                    <p class="text-center m-0">🦸SchoolHero | &copy; 2022</p>
                 </div>
             </div>
         </footer>
@@ -108,11 +115,22 @@
                         spaces: 10,
                         img_url: "https://images.unsplash.com/photo-1551218808-94e220e084d2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
                     }
-                ]
+                ],
+                cart_items: 0
             },
             methods: {
-                addToCart: function(){
-                    
+                addToCart: function(id, spaces){
+                    if (this.activities[id].spaces >= 1) {
+                        
+                        // Update the DOM
+                        this.activities[id].spaces -= 1
+                        
+                        // Update activities storage
+                       this.cart_items += 1
+                    }
+                    else{
+                        this.activities[id].spaces = 0
+                    }
                 }
             }
         })
