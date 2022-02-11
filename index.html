@@ -23,7 +23,7 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <button type="button" class="btn rounded-0 btn-sm btn-dark position-relative">
-                            Cart
+                            <i class="fas fa-shopping-cart"></i>
                             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                             {{ cart_items }}
                             </span>
@@ -59,19 +59,19 @@
             <div class="row">
                 <div class="col-sm-4" v-for="activity in activities">
                     <div class="card mb-3 rounded-0">
-                        <div class="row g-0 align-items-center">
-                          <div class="col-md-6">
-                            <img v-bind:src="activity.img_url" class="img-fluid rounded-0 mycard-img" alt="...">
-                          </div>
-                          <div class="col-md-6">
-                            <div class="card-body">
-                              <h5 class="card-title">{{activity.title}}</h5>
-                              <p class="card-text m-0"><strong>Location:</strong> {{activity.location}}</p>
-                              <p class="card-text m-0"><strong>Price:</strong> $ {{activity.price}}</p>
-                              <p class="card-text mb-2"><strong>Spaces</strong>: {{activity.spaces}}</p>
-                              <button class="btn btn-sm btn-primary rounded-0" v-on:click="addToCart(activity.id, activity.spaces)">Add to cart</button>
+                        <div class="activity">
+                            <div class="activity-img p-0">
+                                <img v-bind:src="activity.img_url" class="rounded-0 mycard-img" alt="...">
                             </div>
-                          </div>
+                            <div class="activity-content p-2">
+                                <div>
+                                    <h5 class="card-title">{{activity.title}}</h5>
+                                    <p class="card-text m-0"><strong>Location:</strong> {{activity.location}}</p>
+                                    <p class="card-text m-0"><strong>Price:</strong> $ {{activity.price}}</p>
+                                    <p class="card-text mb-2"><strong>Spaces</strong>: {{activity.spaces}}</p>
+                                    <button class="btn btn-sm btn-primary rounded-0" v-on:click="addToCart(activity.id, activity.spaces)">Add to cart</button>
+                                </div>
+                            </div>
                         </div>
                     </div>      
                 </div>
