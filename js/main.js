@@ -184,11 +184,11 @@ var app = new Vue({
         },
         // | >>>>>>>>>>> Sort by price <<<<<<<<<<< | 
         sortbyPrice: function(a, b){
-            return a.price -b.price;
+            return a.price-b.price;
         },
         // | >>>>>>>>>>> Sort by spaces <<<<<<<<<<< | 
         sortbySpaces: function(a, b){
-            return a.spaces -b.spaces;
+            return a.spaces-b.spaces;
         }
     }
 })
