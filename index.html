@@ -31,9 +31,9 @@
                     </li>
                     <li class="nav-item">
                         <div class="d-flex">
-                            <a class="nav-link active" aria-current="page" href="#"><i class="social-icons fab fa-linkedin"></i></a>
-                            <a class="nav-link active" aria-current="page" href="#"><i class="social-icons fab fa-twitter"></i></a>
-                            <a class="nav-link active" aria-current="page" href="#"><i class="social-icons fab fa-github"></i></a>
+                            <a class="nav-link active" target="_blank" aria-current="page" href="https://www.linkedin.com/in/king-jacob-a184a21b2/"><i class="social-icons fab fa-linkedin"></i></a>
+                            <a class="nav-link active" target="_blank" aria-current="page" href="https://twitter.com/Kingjacobxx"><i class="social-icons fab fa-twitter"></i></a>
+                            <a class="nav-link active" target="_blank" aria-current="page" href="https://github.com/codeCrown12/schoolhero"><i class="social-icons fab fa-github"></i></a>
                         </div>
                     </li>
                 </ul>
@@ -41,7 +41,7 @@
             </div>
         </nav>
         <!-- Page-caption and filters-->
-        <div class="container-fluid border-bottom mt-5">
+        <div class="container-fluid border-bottom mt-3">
             <div class="row justify-content-center">
                 <div class="col-md-7">
                     <h1 class="text-center page-caption">
@@ -77,12 +77,12 @@
             </div>
         </div>
         <!-- Page body -->
-        <div class="container mt-5">
+        <div class="container mt-4">
             <!-- No results error message -->
             <div v-if="filteredList().length < 1" class="row justify-content-center">
                 <div class="col-sm-10">
                     <p class="text-center m-0">
-                        <img src="assets/images/Smiley face_Two Color.svg" alt="">
+                        <img style="width: 300px; object-fit: cover;" src="assets/images/Smiley face_Two Color.svg" alt="">
                     </p>
                     <p class="text-center m-0">No results found</p>
                 </div>
@@ -91,23 +91,17 @@
 
             <!-- Lessons/activities List -->
             <div class="row">
-                <div class="col-sm-4 mb-3" v-for="activity in filteredList()">
+                <div class="col-sm-3 mb-2" v-for="activity in filteredList()">
                     <div class="card mb-3 rounded-0">
-                        <div class="activity">
-                            <div class="activity-img p-0">
-                                <img v-bind:src="activity.img_url" class="rounded-0 mycard-img" alt="...">
-                            </div>
-                            <div class="activity-content p-2">
-                                <div>
-                                    <h5 class="card-title">{{activity.title}}</h5>
-                                    <p class="card-text m-0"><strong>Location:</strong> {{activity.location}}</p>
-                                    <p class="card-text m-0"><strong>Price:</strong> $ {{activity.price}}</p>
-                                    <p class="card-text mb-2"><strong>Spaces</strong>: {{activity.spaces}}</p>
-                                    <button v-bind:disabled="disableAddToCart(activity.id, activity.spaces)" class="btn btn-sm btn-primary rounded-0" v-on:click="addToCart(activity.id, activity.spaces)">Add to cart</button>
-                                </div>
-                            </div>
+                        <img v-bind:src="activity.img_url" class="card-img-top rounded-0 mycard-img" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{activity.title}}</h5>
+                            <p class="card-text m-0"><strong>Location:</strong> {{activity.location}}</p>
+                            <p class="card-text m-0"><strong>Price:</strong> $ {{activity.price}}</p>
+                            <p class="card-text mb-2"><strong>Spaces</strong>: {{activity.spaces}}</p>
+                            <button v-bind:disabled="disableAddToCart(activity.id)" class="btn btn-sm btn-primary rounded-0 w-100" v-on:click="addToCart(activity.id)">Add to cart <i class="fas fa-cart-plus"></i></button>
                         </div>
-                    </div>      
+                      </div>
                 </div>
             </div>
             <!-- End of lessons/activities list -->

@@ -27,37 +27,6 @@
     box-shadow: none;
 }
 .mycard-img{
-    height: 200px;
-    width: 180px;
+    height: 140px;
     object-fit: cover;
-}
-.card-body{
-    text-align: end;
-}
-.activity{
-    display: flex;
-    align-items: center;
-}
-.activity-img{
-    width: 50%;
-}
-.activity-content{
-    width: 50%;
-    text-align: end;
-}
-@media screen and (max-width: 992px){
-    .activity{
-        flex-wrap: wrap;
-    }
-    .activity-img{
-        width: 100%;
-    }
-    .activity-content{
-        width: 100%;
-        text-align: start;
-    }
-    .mycard-img{
-        width: 100%;
-        height: 150px;
-    }
 }
