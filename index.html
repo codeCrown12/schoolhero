@@ -98,7 +98,7 @@
                             <h5 class="card-title">{{activity.title}}</h5>
                             <p class="card-text m-0"><strong>Location:</strong> {{activity.location}}</p>
                             <p class="card-text m-0"><strong>Price:</strong> $ {{activity.price}}</p>
-                            <p class="card-text mb-2"><strong>Spaces</strong>: {{activity.spaces}}</p>
+                            <p class="card-text mb-2"><strong>Spaces</strong>: {{activity.spaces}} <span v-if="activity.spaces < 1" style="color: red;">(Out of stock)</span></p>
                             <button v-bind:disabled="disableAddToCart(activity.id)" class="btn btn-sm btn-primary rounded-0 w-100" v-on:click="addToCart(activity.id)">Add to cart <i class="fas fa-cart-plus"></i></button>
                         </div>
                       </div>
