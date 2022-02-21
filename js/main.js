@@ -138,7 +138,7 @@ var app = new Vue({
         //Logic to filter results based on search keyword
         filteredList: function(){
             let newList = this.activities.filter((lesson) => {
-                return lesson.title.toLowerCase().match(this.search_keyword)
+                return lesson.title.toLowerCase().match(this.search_keyword) || lesson.location.toLowerCase().match(this.search_keyword)
             });    
             /** >>>>>>>>>>>>>> SORT BASED ON PROPERTY <<<<<<<<<<<<<<<<<< **/ 
             if (this.attribute_sort == "location") {
