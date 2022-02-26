@@ -26,6 +26,10 @@
     outline: 0;
     box-shadow: none;
 }
+.btn-success{
+    background-color: #3bb75e !important;
+    border-color: #3bb75e !important;
+}
 .mycard-img{
     height: 140px;
     object-fit: cover;

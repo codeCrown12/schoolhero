@@ -22,7 +22,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <button v-bind:disabled="disableCart()" type="button" class="btn rounded-0 btn-sm btn-dark position-relative" data-bs-toggle="modal" data-bs-target="#cartModal">
+                        <button v-if="hideCart()" type="button" class="btn rounded-0 btn-sm btn-dark position-relative" data-bs-toggle="modal" data-bs-target="#cartModal">
                             <i class="fas fa-shopping-cart"></i>
                             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                             {{ cart_count }}
@@ -95,27 +95,76 @@
                     <div class="card mb-3 rounded-0">
                         <img v-bind:src="activity.img_url" class="card-img-top rounded-0 mycard-img" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">{{activity.title}}</h5>
+                            <h6 class="card-title">{{activity.title}}</h6>
                             <p class="card-text m-0"><strong>Location:</strong> {{activity.location}}</p>
                             <p class="card-text m-0"><strong>Price:</strong> $ {{activity.price}}</p>
                             <p class="card-text mb-2"><strong>Spaces</strong>: {{activity.spaces}} <span v-if="activity.spaces < 1" style="color: red;">(Out of stock)</span></p>
                             <button v-bind:disabled="disableAddToCart(activity.id)" class="btn btn-sm btn-primary rounded-0 w-100" v-on:click="addToCart(activity.id)">Add to cart <i class="fas fa-cart-plus"></i></button>
                         </div>
-                      </div>
+                    </div>
                 </div>
             </div>
             <!-- End of lessons/activities list -->
 
             <!-- Cart modal -->
             <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-lg modal-dialog-scrollable">
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title" id="exampleModalLabel">My cart <i class="fas fa-shopping-cart"></i></h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                      Cart items and check_out form will go here!
+                      <div class="row">
+                          <div class="col-sm-7">
+                            <!-- Cart items -->
+                            <div class="row">
+                                <h6>Cart Items</h6>
+                                <!-- No items in the cart error message -->
+                                <div v-if="cart_items.length < 1" class="row justify-content-center">
+                                    <div class="col-sm-10">
+                                        <p class="text-center m-0">
+                                            <img style="width: 200px; object-fit: cover;" src="assets/images/Smiley face_Two Color.svg" alt="">
+                                        </p>
+                                        <p class="text-center m-0">No items in the cart</p>
+                                    </div>
+                                </div>
+                                <!-- End of no items in the cart error message -->
+                                <!-- Loop through cart items -->
+                                <div class="col-sm-6" v-for="item in cart_items">
+                                    <div class="card mb-3 rounded-0">
+                                        <img v-bind:src="activities[item].img_url" class="card-img-top rounded-0 mycard-img" alt="...">
+                                        <div class="card-body">
+                                            <h6 class="card-title">{{activities[item].title}}</h6>
+                                            <p class="card-text m-0"><strong>Location:</strong> {{activities[item].location}}</p>
+                                            <p class="card-text m-0"><strong>Price:</strong> $ {{activities[item].price}}</p>
+                                            <button v-on:click="removeFromCart(item)" class="btn btn-sm btn-danger rounded-0 w-100">Remove from cart <i class="fas fa-cart-arrow-down"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                          <!-- Check out form -->
+                          <div class="col-sm-5">
+                            <h6>Order information</h6>
+                            <div class="total-price">
+                                <div class="d-flex">
+                                    <p class="m-0"><strong>Total:</strong></p>
+                                    <p class="ms-auto">$ {{totalPrice()}}</p>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col">
+                                  <input v-model="order_details.firstname" type="text" class="form-control rounded-0" placeholder="First name" aria-label="First name">
+                                </div>
+                                <div class="col">
+                                  <input v-model="order_details.lastname" type="text" class="form-control rounded-0" placeholder="Last name" aria-label="Last name">
+                                </div>
+                            </div>
+                            <input type="text" v-model="order_details.mobile" class="form-control rounded-0 mb-2" placeholder="Phone number" aria-label="Last name">
+                            <button v-if="validateFields()" v-on:click="checkOut()" class="btn btn-success w-100 rounded-0">Checkout <i class="fas fa-paper-plane"></i></button>
+                        </div>
+                      </div>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal">Close</button>
@@ -138,6 +187,7 @@
         <!-- End of footer section -->
 
     </div>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="js/main.js"></script>
 </body>

@@ -100,6 +100,12 @@ var app = new Vue({
             }
         ],
         cart_count: 0,
+        cart_items: [],
+        order_details:{
+            firstname: "",
+            lastname: "",
+            mobile: "", 
+        },
         search_keyword: "",
         sort_order: "ascending",
         attribute_sort: "title"
@@ -108,12 +114,12 @@ var app = new Vue({
         // Logic to add class activity to cart
         addToCart: function(id){
             if (this.activities[id].spaces >= 1) {
-                
                 // Update the DOM
                 this.activities[id].spaces -= 1
-                
                 // Update activities storage
-               this.cart_count += 1
+                this.cart_count += 1
+                //Add item to cart array
+                this.cart_items.push(id)
             }
             else{
                 this.activities[id].spaces = 0
@@ -129,11 +135,46 @@ var app = new Vue({
             }
         },
         // Logic to disable art button if no items in the cart
-        disableCart: function(){
+        hideCart: function(){
             if (this.cart_count < 1) {
+                return false
+            }
+            return true
+        },
+        // Remove items from cart
+        removeFromCart: function(id){
+            // add the space back to the stock
+            this.activities[id].spaces += 1
+            let item_index = this.cart_items.indexOf(id)
+            this.cart_items.splice(item_index, 1)
+            this.cart_count -= 1
+        },
+        // Get total price of items in the cart
+        totalPrice: function(){
+            let sum = 0
+            for (let i = 0; i < this.cart_items.length; i++) {
+                sum += this.activities[this.cart_items[i]].price
+            }
+            return sum
+        },
+        // Validate name and phone number check out fields
+        validateFields: function(){
+            if (/^[0-9]+$/.test(this.order_details.mobile) && /^[a-z]+$/i.test(this.order_details.firstname) && /^[a-z]+$/i.test(this.order_details.lastname)){
                 return true
             }
             return false
+        },
+        // Checkout logic
+        checkOut: function(){
+            //Empty cart
+            this.cart_items = []
+            this.cart_count = 0
+            //Display message
+            Swal.fire(
+                'Success!',
+                'Order submitted successfully!',
+                'success'
+            )
         },
         //Logic to filter results based on search keyword
         filteredList: function(){
