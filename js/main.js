@@ -169,6 +169,12 @@ var app = new Vue({
             //Empty cart
             this.cart_items = []
             this.cart_count = 0
+
+            // Clear check out form fields
+            this.order_details.firstname = ""
+            this.order_details.lastname = ""
+            this.order_details.mobile = ""
+            
             //Display message
             Swal.fire(
                 'Success!',
