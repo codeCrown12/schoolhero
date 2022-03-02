@@ -1,7 +1,7 @@
-[
+let lessons = [
     {
         "id": 0,
-        "title": "Basket ball 🏀",
+        "title": "Basket ball",
         "location": "New york",
         "price": 500,
         "spaces": 5,
@@ -9,7 +9,7 @@
     },
     {
         "id": 1,
-        "title": "Music 🎹",
+        "title": "Music",
         "location": "Seoul",
         "price": 1500,
         "spaces": 5,
@@ -17,7 +17,7 @@
     },
     {
         "id": 2,
-        "title": "Cooking 👨‍🍳",
+        "title": "Cooking",
         "location": "Beijing",
         "price": 300,
         "spaces": 5,
