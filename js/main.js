@@ -1,8 +1,7 @@
 var app = new Vue({
     el: "#app",
     data:{
-        activities: lessons,
-        cart_count: 0,
+        lessons: lessons,
         cart_items: [],
         order_details:{
             firstname: "",
@@ -19,8 +18,6 @@ var app = new Vue({
             if (lesson.spaces >= 1) {
                 // Update the DOM
                 lesson.spaces -= 1
-                // Update activities storage
-                this.cart_count += 1
                 //Add item to cart array
                 this.cart_items.push(lesson.id)
             }
@@ -28,31 +25,46 @@ var app = new Vue({
                 lesson.spaces = 0
             }
         },
+        // Method to count items in the cart
+        countCart: function(){
+            return this.cart_items.length
+        },
+        // Method to return information about the items in the cart
+        cartItemsInfo: function(){
+            let cart_items_modified = []
+            for (let i = 0; i < this.cart_items.length; i++) {
+                for (let j = 0; j < this.lessons.length; j++) {
+                    if (this.lessons[j].id == this.cart_items[i]) {
+                        cart_items_modified.push(this.lessons[j])
+                    }   
+                }
+            }
+            return cart_items_modified
+        },
         // Logic to disable add to cart button if number of spaces reaches zero
         disableAddToCart: function(lesson){
             if (lesson.spaces >= 1){
                 return false
             }
-            else{
-                return true
-            }
+            return true
         },
         // Logic to disable art button if no items in the cart
         hideCart: function(){
-            if (this.cart_count < 1) {
+            if (this.countCart() >= 1) {
                 return false
             }
             return true
         },
         // Remove items from cart
         removeFromCart: function(id){
-            for (let i = 0; i < this.activities.length; i++) {
-                if (this.activities[i].id == id) {
+            for (let i = 0; i < this.lessons.length; i++) {
+                if (this.lessons[i].id == id) {
                     // add the space back to the stock
-                    this.activities[i].spaces += 1
+                    this.lessons[i].spaces += 1
+                    // Find index of item in the cart array
                     let item_index = this.cart_items.indexOf(id)
-                    this.cart_items.splice(item_index, 1)
-                    this.cart_count -= 1       
+                    //remove item from the cart array
+                    this.cart_items.splice(item_index, 1)     
                 }
             }
         },
@@ -60,9 +72,9 @@ var app = new Vue({
         totalPrice: function(){
             let sum = 0
             for (let i = 0; i < this.cart_items.length; i++) {
-                for (let j = 0; j < this.activities.length; j++) {
-                    if (this.activities[j].id == this.cart_items[i]) {
-                        sum += this.activities[j].price
+                for (let j = 0; j < this.lessons.length; j++) {
+                    if (this.lessons[j].id == this.cart_items[i]) {
+                        sum += this.lessons[j].price
                     }   
                 }
             }
@@ -79,7 +91,6 @@ var app = new Vue({
         checkOut: function(){
             //Empty cart
             this.cart_items = []
-            this.cart_count = 0
 
             // Clear check out form fields
             this.order_details.firstname = ""
@@ -95,7 +106,7 @@ var app = new Vue({
         },
         //Logic to filter results based on search keyword
         filteredList: function(){
-            let newList = this.activities.filter((lesson) => {
+            let newList = this.lessons.filter((lesson) => {
                 return lesson.title.toLowerCase().match(this.search_keyword) || lesson.location.toLowerCase().match(this.search_keyword)
             });    
             /** >>>>>>>>>>>>>> SORT BASED ON PROPERTY <<<<<<<<<<<<<<<<<< **/ 

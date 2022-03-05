@@ -3,7 +3,7 @@ let lessons = [
         "id": 0,
         "title": "Basket ball",
         "location": "New york",
-        "price": 500,
+        "price": 40,
         "spaces": 5,
         "img_url": "https://images.unsplash.com/photo-1608245449230-4ac19066d2d0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
     },
@@ -11,7 +11,7 @@ let lessons = [
         "id": 1,
         "title": "Music",
         "location": "Seoul",
-        "price": 1500,
+        "price": 60,
         "spaces": 5,
         "img_url": "https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
     },
@@ -19,7 +19,7 @@ let lessons = [
         "id": 2,
         "title": "Cooking",
         "location": "Beijing",
-        "price": 300,
+        "price": 10,
         "spaces": 5,
         "img_url": "https://images.unsplash.com/photo-1551218808-94e220e084d2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
     },
@@ -27,7 +27,7 @@ let lessons = [
         "id": 3,
         "title": "Biology",
         "location": "Dubai",
-        "price": 300,
+        "price": 200,
         "spaces": 5,
         "img_url": "https://images.unsplash.com/photo-1628595351029-c2bf17511435?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80"
     },
@@ -35,7 +35,7 @@ let lessons = [
         "id": 4,
         "title": "Parkour",
         "location": "Dubai",
-        "price": 1300,
+        "price": 120,
         "spaces": 5,
         "img_url": "https://images.unsplash.com/photo-1550701035-c0bb32de8aca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1031&q=80"
     },
@@ -51,7 +51,7 @@ let lessons = [
         "id": 6,
         "title": "English",
         "location": "London",
-        "price": 300,
+        "price": 30,
         "spaces": 5,
         "img_url": "https://images.unsplash.com/photo-1565022536102-f7645c84354a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=873&q=80"
     },
@@ -59,7 +59,7 @@ let lessons = [
         "id": 7,
         "title": "Physics",
         "location": "Washington",
-        "price": 1300,
+        "price": 70,
         "spaces": 5,
         "img_url": "https://images.unsplash.com/photo-1611784601826-d17011218c7b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
     },
@@ -67,7 +67,7 @@ let lessons = [
         "id": 8,
         "title": "Chemistry",
         "location": "Japan",
-        "price": 1300,
+        "price": 100,
         "spaces": 5,
         "img_url": "https://images.unsplash.com/photo-1554475900-0a0350e3fc7b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=417&q=80"
     },
