@@ -48,10 +48,11 @@
                     <div class="col-md-12">
                         <div class="row justify-content-center">
                             <div class="col-sm-5 mb-2">
-                                <input v-model="search_keyword" type="text" class="form-control rounded-0 p-2" placeholder="Search names, locations for interesting activities..." aria-label="Recipient's username" aria-describedby="button-addon2">
+                                <input v-on:input="filterLessons" v-model="search_keyword" type="text" class="form-control rounded-0 p-2" placeholder="Search names, locations for interesting activities..." aria-label="Recipient's username" aria-describedby="button-addon2">
                             </div>
                             <div class="col-sm-4 mb-2">
-                                <select v-model="attribute_sort" class="form-select p-2 rounded-0">
+                                <select v-on:change="sortList" v-model="attribute_sort" class="form-select p-2 rounded-0">
+                                    <option value="">-- Sort options --</option>
                                     <option value="title">Subject</option>
                                     <option value="location">Location</option>
                                     <option value="price">Price</option>
@@ -59,7 +60,8 @@
                                 </select>
                             </div>
                             <div class="col-sm-3 mb-2">
-                                <select v-model="sort_order" class="form-select p-2 rounded-0">
+                                <select v-on:change="sortList" v-model="sort_order" class="form-select p-2 rounded-0">
+                                    <option value="">-- Sort order --</option>
                                     <option value="ascending">Ascending</option>
                                     <option value="descending">Descending</option>
                                 </select>
@@ -71,8 +73,9 @@
         </div>
         <!-- Page body -->
         <div class="container mt-4">
+
             <!-- No results error message -->
-            <div v-if="filteredList().length < 1" class="row justify-content-center">
+            <div v-if="lessons.length < 1" class="row justify-content-center">
                 <div class="col-sm-10">
                     <p class="text-center m-0">
                         <img style="width: 300px; object-fit: cover;" src="assets/images/Smiley face_Two Color.svg" alt="">
@@ -84,9 +87,9 @@
 
             <!-- Lessons/activities List -->
             <div class="row">
-                <div class="col-sm-3 mb-2" v-for="activity in filteredList()">
+                <div class="col-sm-3 mb-2" v-for="activity in lessons">
                     <div class="card mb-3 rounded-0">
-                        <img v-bind:src="activity.img_url" class="card-img-top rounded-0 mycard-img" alt="...">
+                        <img v-bind:src="activity.url" class="card-img-top rounded-0 mycard-img" alt="...">
                         <div class="card-body">
                             <h6 class="card-title">{{activity.title}}</h6>
                             <p class="card-text m-0"><strong>Location:</strong> {{activity.location}}</p>
@@ -114,7 +117,7 @@
                             <div class="row">
                                 <h6>Cart Items</h6>
                                 <!-- No items in the cart error message -->
-                                <div v-if="cart_items.length < 1" class="row justify-content-center">
+                                <div v-if="countCart() < 1" class="row justify-content-center">
                                     <div class="col-sm-10">
                                         <p class="text-center m-0">
                                             <img style="width: 200px; object-fit: cover;" src="assets/images/Smiley face_Two Color.svg" alt="">
@@ -122,16 +125,16 @@
                                         <p class="text-center m-0">No items in the cart</p>
                                     </div>
                                 </div>
-                                <!-- End of no items in the cart error message -->
                                 <!-- Loop through cart items -->
                                 <div class="col-sm-6" v-for="item in cartItemsInfo()">
                                     <div class="card mb-3 rounded-0">
-                                        <img v-bind:src="item.img_url" class="card-img-top rounded-0 mycard-img" alt="...">
+                                        <img v-bind:src="item.url" class="card-img-top rounded-0 mycard-img" alt="...">
                                         <div class="card-body">
                                             <h6 class="card-title">{{item.title}}</h6>
                                             <p class="card-text m-0"><strong>Location:</strong> {{item.location}}</p>
                                             <p class="card-text m-0"><strong>Price:</strong> $ {{item.price}}</p>
-                                            <button v-on:click="removeFromCart(item.id)" class="btn btn-sm btn-danger rounded-0 w-100">Remove from cart <i class="fas fa-cart-arrow-down"></i></button>
+                                            <p class="card-text m-0"><strong>Spaces:</strong> {{item.spaces}}</p>
+                                            <button v-on:click="removeFromCart(item.id, item.spaces)" class="btn mt-1 btn-sm btn-danger rounded-0 w-100">Remove from cart <i class="fas fa-cart-arrow-down"></i></button>
                                         </div>
                                     </div>
                                 </div>
@@ -179,7 +182,6 @@
     </div>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="js/lessons.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
