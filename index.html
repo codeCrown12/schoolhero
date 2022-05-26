@@ -80,7 +80,8 @@
                     <p class="text-center m-0">
                         <img style="width: 300px; object-fit: cover;" src="assets/images/Smiley face_Two Color.svg" alt="">
                     </p>
-                    <p class="text-center m-0"><strong>{{search_keyword}}</strong> not found</p>
+                    <p class="text-center m-0" v-if="search_keyword != '' && lessons.length < 1"> <strong>{{search_keyword}}</strong> not found</p>
+                    <p class="text-center m-0" v-else> Waiting for items...</p>
                 </div>
             </div>
             <!-- End of no results error message -->
@@ -89,7 +90,7 @@
             <div class="row">
                 <div class="col-sm-3 mb-2" v-for="activity in lessons">
                     <div class="card mb-3 rounded-0">
-                        <img v-bind:src="activity.url" class="card-img-top rounded-0 mycard-img" alt="...">
+                        <img v-bind:src="activity.url" class="card-img-top rounded-0 mycard-img" :alt="activity.title">
                         <div class="card-body">
                             <h6 class="card-title">{{activity.title}}</h6>
                             <p class="card-text m-0"><strong>Location:</strong> {{activity.location}}</p>
@@ -128,7 +129,7 @@
                                 <!-- Loop through cart items -->
                                 <div class="col-sm-6" v-for="item in cartItemsInfo()">
                                     <div class="card mb-3 rounded-0">
-                                        <img v-bind:src="item.url" class="card-img-top rounded-0 mycard-img" alt="...">
+                                        <img :src="item.url" class="card-img-top rounded-0 mycard-img" :alt="item.title">
                                         <div class="card-body">
                                             <h6 class="card-title">{{item.title}}</h6>
                                             <p class="card-text m-0"><strong>Location:</strong> {{item.location}}</p>
