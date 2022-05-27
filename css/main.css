@@ -1,0 +1,36 @@
+@import url('https://fonts.cdnfonts.com/css/vegur-2');
+*{
+    font-family: 'Vegur', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.social-icons{
+    font-size: 20px;
+}
+.page-caption{
+    font-weight: 900;
+    font-size: 53px;
+}
+.form-control:focus{
+    border-color: #0d6efd;
+    outline: 0;
+    box-shadow: none;
+}
+.form-select:focus{
+    border-color: #0d6efd;
+    outline: 0;
+    box-shadow: none;
+}
+.btn:focus{
+    outline: 0;
+    box-shadow: none;
+}
+.btn-success{
+    background-color: #3bb75e !important;
+    border-color: #3bb75e !important;
+}
+.mycard-img{
+    height: 140px;
+    object-fit: cover;
+}
