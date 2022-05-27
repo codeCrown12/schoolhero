@@ -80,6 +80,7 @@ var app = new Vue({
             }
             return sum
         },
+        
         // Validate name and phone number check out fields
         validateFields: function(){
             if (/^[0-9]+$/.test(this.order_details.mobile) && /^[a-z]+$/i.test(this.order_details.firstname) && /^[a-z]+$/i.test(this.order_details.lastname)){
